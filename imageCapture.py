@@ -40,7 +40,7 @@ clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
 triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
-folder_name = shot_date + picID
+folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
 def createSaveFolder():
