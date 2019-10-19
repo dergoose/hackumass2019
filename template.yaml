@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  spaceLapseStitcher:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: spaceLapseStitcher.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: >-
+        arn:aws:iam::322313285648:role/service-role/spaceLapseStitcher-role-ympr7iwu
