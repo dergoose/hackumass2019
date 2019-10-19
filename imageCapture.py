@@ -14,9 +14,9 @@ def welcome():
         print("Invalid interval")
         exit()
     global num_max
-    num_max = num_pic
+    num_max = int(num_pic)
     global num_interval
-    num_interval = num_int
+    num_interval = int(num_int)
     
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
