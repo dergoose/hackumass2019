@@ -57,18 +57,11 @@ def killgphoto2Process():
 def createSaveFolder():
 
     try:
-        os.makedirs("hackumassvii")
-    except:
-        print("Failed to create base directory.")
-
-    os.chdir("/media/pi/SANDISK 128/hackumassvii")
-
-    try:
-        os.makedirs("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
+        os.makedirs("/media/pi/SANDISK\ 128/hackumassvii/" + folder_name)
     except:
         print("Failed to create the picture directory.")
 
-    os.chdir("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
+    os.chdir("/media/pi/SANDISK\ 128/hackumassvii/" + folder_name)
 
 def captureImages():
     gp(triggerCommand)
