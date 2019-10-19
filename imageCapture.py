@@ -58,9 +58,10 @@ def createSaveFolder():
     os.chdir(save_location)
 
     try:
-        os.mkdirs(folder_name, exist_ok=True)
+        os.mkdir(folder_name, exist_ok=True)
     except:
         print("Failed to create the picture directory.")
+        exit()
 
     if not os.path.exists(folder_name):
         print("Creation failure")
