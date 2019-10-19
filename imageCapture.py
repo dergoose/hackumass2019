@@ -8,7 +8,7 @@ num_max = -1
 num_interval = -1
 
 shot_date = datetime.now().strftime("%Y-%m-%d")
-shot_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+shot_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 picID = "spacelapse" #we change dis
 
 clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
@@ -16,8 +16,8 @@ clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
 triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
-folder_name = "/" + shot_time + picID
-save_location = "/media/pi/SANDISK 128/hackumassvii" + folder_name
+directory = picID
+parent_dir = "/media/pi/SANDISK 128/hackumassvii" 
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -56,27 +56,26 @@ def killgphoto2Process():
 
 def createSaveFolder():
     print("was in: " + os.getcwd())
-    os.chdir("/media/pi/SANDISK 128/hackumassvii/")
+    os.chdir(parent_dir)
     print("now in: " + os.getcwd())
+    
+    if not os.path.exists(parent_dir +"/" + directory):
+        try:
+            os.mkdir(directory)
+        except Exception as e:
+            print(e)
+            exit()
 
-    os.chmod("/media/pi/SANDISK 128/hackumassvii/", stat.S_IRWXG )
-
-    try:
-        os.mkdir(folder_name, mode= 0o777)
-    except Exception as e:
-        print(e)
-        exit()
-
-    if not os.path.exists(save_location):
+    if not os.path.exists(parent_dir +"/" + directory):
         print("Creation failure")
         exit()
 
-    os.chdir(save_location)
+    os.chdir(parent_dir +"/" + directory)
 
 def captureImages():
     gp(triggerCommand)
     goodPrint("took picture")
-    sleep(num_interval)
+    sleep(3)
 
 def renameFiles():
     pictures = 1
