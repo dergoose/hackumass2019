@@ -66,7 +66,7 @@ def renameFiles():
     listPic = os.listdir(".")
     listPic.sort()
     for filename in listPic:
-        if len(filename) < 13:
+        # if len(filename) < 13:
             if filename.endswith(".JPG"):
                 name = str(pictures)
                 name = name.zfill(3)
@@ -88,7 +88,7 @@ renameFiles()
 gp(clearCommand)
 
 
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 4 -i img%03d.JPG output.mp4"
+bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mp4"
 
 
 os.chdir(save_location)
