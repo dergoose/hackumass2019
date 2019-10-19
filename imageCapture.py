@@ -18,8 +18,6 @@ def welcome():
     global num_interval
     num_interval = num_int
     
-
-
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
     p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
@@ -52,6 +50,9 @@ def createSaveFolder():
     os.chdir(save_location)
     
 def captureImages():
+    if(num_max < 0 or num_interval < 0):
+        print("Something has gone terribly wrong")
+        exit()
     for i in range(num_max):
         gp(triggerCommand)
         global num_shot
@@ -72,6 +73,7 @@ def renameFiles(ID):
                 #os.rename(filename, (shot_time + ID + ".CR2"))
                 #print("renamed the cr2")
                 
+welcome()
 killgphoto2Process()
 gp(clearCommand)
 createSaveFolder()
