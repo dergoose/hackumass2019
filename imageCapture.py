@@ -3,12 +3,24 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
-bashCommand = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
-
+bashCommand1 = "cd " + folder_name
+bashCommand2 = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
 
 num_shot = 0
 num_max = -1
 num_interval = -1
+
+shot_date = datetime.now().strftime("%Y-%m-%d")
+shot_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+picID = "spacelapse" #we change dis
+
+clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
+                "-R", "--delete-all-files"]
+triggerCommand = ["--trigger-capture"]
+downloadCommand = ["--get-all-files"]
+
+folder_name = shot_time + picID
+save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -36,18 +48,6 @@ def killgphoto2Process():
             #kill the process
             pid = int(line.split(None,1)[0])
             os.kill(pid, signal.SIGKILL)
-
-shot_date = datetime.now().strftime("%Y-%m-%d")
-shot_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-picID = "spacelapse" #we change dis
-
-clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
-                "-R", "--delete-all-files"]
-triggerCommand = ["--trigger-capture"]
-downloadCommand = ["--get-all-files"]
-
-folder_name = shot_time + picID
-save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
 def createSaveFolder():
     try:
@@ -86,5 +86,9 @@ for i in range(num_max):
 gp(downloadCommand)
 renameFiles()
 gp(clearCommand)
-process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-output, error = process.communicate() 
+
+process1 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+output, error = process1.communicate() 
+
+process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
+output, error = process2.communicate() 
