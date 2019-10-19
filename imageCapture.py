@@ -16,7 +16,7 @@ triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
 folder_name = "/" + shot_time + picID
-save_location = "/media/pi/SANDISK 128/hackumassvii/" + folder_name
+save_location = "/media/pi/SANDISK 128/hackumassvii" + folder_name
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -59,7 +59,7 @@ def createSaveFolder():
     print("now in: " + os.getcwd())
 
     try:
-        os.mkdir(folder_name)
+        os.mkdir(folder_name, mode= 0o777)
     except Exception as e:
         print(e)
         exit()
