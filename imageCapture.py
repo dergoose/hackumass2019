@@ -16,7 +16,7 @@ triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
-save_location = "/media/pi/SANDISK 128/hackumassvii/"
+save_location = "/media/pi/SANDISK 128/hackumassvii/" + folder_name
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -45,7 +45,6 @@ def welcome():
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
     p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
-    out, err = p.communicate()
 
     #search for the line that has the process we want to kill
     for line in out.splitlines():
@@ -56,16 +55,16 @@ def killgphoto2Process():
 
 def createSaveFolder():
     print("was in: " + os.getcwd())
-    os.chdir(save_location)
+    os.chdir("/media/pi/SANDISK 128/hackumassvii/")
     print("now in: " + os.getcwd())
 
     try:
-        os.mkdir(folder_name, exist_ok=True)
+        os.makedirs(save_location, exist_ok=True)
     except:
         print("Failed to create the picture directory.")
         exit()
 
-    if not os.path.exists(folder_name):
+    if not os.path.exists(save_location):
         print("Creation failure")
         exit()
 
