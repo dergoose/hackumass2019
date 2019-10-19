@@ -7,6 +7,9 @@ num_shot = 0
 num_max = -1
 num_interval = -1
 
+def goodPrint(prin):
+    print(datetime.now + " - " + prin)
+
 def welcome():
     num_pic = input ("Enter how many photos you'd like to take: ") 
     num_int = input ("Enter how long your interval is (greater than 2): ") 
@@ -52,13 +55,11 @@ def createSaveFolder():
     
 def captureImages():
     gp(triggerCommand)
-    print("took picture")
-    global num_shot
+    goodPrint("took picture")
     sleep(num_interval)
     gp(downloadCommand)
     gp(clearCommand)
 
-    
 def renameFiles():
     pictures = 0
     listPic = os.listdir(".")
@@ -69,12 +70,10 @@ def renameFiles():
                 name = str(pictures)
                 name = name.zfill(3)
                 pictures += 1 
-                print("naming "+ filename +" to img" + name + ".JPG")
+                goodPrint("naming "+ filename +" to img" + name + ".JPG")
                 os.rename(filename, ("img" + name + ".JPG"))
-                print("renamed the jpg")
-            #elif filename.endswith(".CR2"):
-                #os.rename(filename, (shot_time + ID + ".CR2"))
-                #print("renamed the cr2")
+                goodPrint("renamed the jpg")
+
                 
 welcome()
 killgphoto2Process()
