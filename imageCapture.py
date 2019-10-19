@@ -55,13 +55,12 @@ def killgphoto2Process():
             os.kill(pid, signal.SIGKILL)
 
 def createSaveFolder():
-
     try:
         os.makedirs(save_location, exist_ok=True)
     except:
         print("Failed to create the picture directory.")
 
-    if os.path.exists(save_location):
+    if not os.path.exists(save_location):
         print("wut")
         exit()
 
