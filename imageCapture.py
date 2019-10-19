@@ -88,8 +88,7 @@ gp(downloadCommand)
 renameFiles()
 gp(clearCommand)
 
-process1 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
-output, error = process1.communicate() 
+os.chdir(folder_name)
 
 process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate() 
