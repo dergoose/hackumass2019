@@ -58,11 +58,11 @@ def createSaveFolder():
     os.chdir("/media/pi/SANDISK 128/hackumassvii/")
     print("now in: " + os.getcwd())
 
-    # try:
-    os.makedirs(save_location, exist_ok=True)
-    # except:
-    #     print("Failed to create the picture directory.")
-    #     exit()
+    try:
+        os.mkdir(folder_name)
+    except Exception as e:
+        print(e)
+        exit()
 
     if not os.path.exists(save_location):
         print("Creation failure")
