@@ -3,7 +3,6 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
-
 num_shot = 0
 num_max = -1
 num_interval = -1
@@ -20,11 +19,12 @@ downloadCommand = ["--get-all-files"]
 folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
-bashCommand2 = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
+bashCommand2 = "ffmpeg -start_number 001 -framerate 24 -i img%03d.jpg output.mp4"
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
 
+#input desired photos and frequency of capture thru the terminal
 def welcome():
     num_pic = input ("Enter how many photos you'd like to take: ") 
     num_int = input ("Enter how long your interval is (greater than 2): ") 
