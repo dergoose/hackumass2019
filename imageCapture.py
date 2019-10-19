@@ -61,7 +61,9 @@ def captureImages():
     
 def renameFiles():
     pictures = 0
-    for filename in os.listdir(".").sort():
+    listPic = os.listdir(".")
+    listPic.sort()
+    for filename in listPic:
         if len(filename) < 13:
             if filename.endswith(".JPG"):
                 name = str(pictures)
