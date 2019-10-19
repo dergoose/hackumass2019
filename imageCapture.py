@@ -14,7 +14,7 @@ picID = "spacelapse" #we change dis
 clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
                 "-R", "--delete-all-files"]
 triggerCommand = ["--trigger-capture"]
-downloadCommand = ["--get-all-files"] 
+downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
@@ -26,8 +26,8 @@ def goodPrint(prin):
 
 #input desired photos and frequency of capture thru the terminal
 def welcome():
-    num_pic = input ("Enter how many photos you'd like to take: ") 
-    num_int = input ("Enter how long your interval is (greater than 2): ") 
+    num_pic = input ("Enter how many photos you'd like to take: ")
+    num_int = input ("Enter how long your interval is (greater than 2): ")
     global num_max
     num_max = int(num_pic)
     global num_interval
@@ -36,12 +36,12 @@ def welcome():
     if num_interval < 3 or num_max < 1:
         print("Invalid input")
         exit()
-    
+
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
     p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
     out, err = p.communicate()
-    
+
     #search for the line that has the process we want to kill
     for line in out.splitlines():
         if b'gvfsd-gphoto2' in line:
@@ -55,7 +55,7 @@ def createSaveFolder():
     except:
         print("Failed to create the new directory.")
     os.chdir(save_location)
-    
+
 def captureImages():
     gp(triggerCommand)
     goodPrint("took picture")
@@ -70,11 +70,11 @@ def renameFiles():
             if filename.endswith(".JPG"):
                 name = str(pictures)
                 name = name.zfill(3)
-                pictures += 1 
+                pictures += 1
                 goodPrint("naming "+ filename +" to img" + name + ".JPG")
                 os.rename(filename, ("img" + name + ".JPG"))
                 goodPrint("renamed the jpg")
-     
+
 welcome()
 killgphoto2Process()
 gp(clearCommand)
@@ -88,7 +88,7 @@ renameFiles()
 gp(clearCommand)
 
 
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mp4"
+bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 4 -i img%03d.JPG output.mp4"
 
 
 os.chdir(save_location)
@@ -99,4 +99,4 @@ output, error = process1.communicate()
 
 
 process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
-output, error = process2.communicate() 
+output, error = process2.communicate()
