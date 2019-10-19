@@ -14,8 +14,9 @@ def welcome():
     num_max = int(num_pic)
     global num_interval
     num_interval = int(num_int)
-    if num_interval < 3:
-        print("Invalid interval")
+
+    if num_interval < 3 or num_max < 1:
+        print("Invalid input")
         exit()
     
 #kill gphoto2 process that starts whenever we connect the camera
@@ -50,21 +51,17 @@ def createSaveFolder():
     os.chdir(save_location)
     
 def captureImages():
-    if(num_max < 0 or num_interval < 0):
-        print("Something has gone terribly wrong")
-        exit()
-    for i in range(num_max):
-        gp(triggerCommand)
-        global num_shot
-        num_shot += 1
-        sleep(num_interval)
-        gp(downloadCommand)
-        gp(clearCommand)
+    gp(triggerCommand)
+    global num_shot
+    num_shot += 1
+    sleep(num_interval)
+    gp(downloadCommand)
+    gp(clearCommand)
     
 def renameFiles(ID):
     name = str(num_shot)
     name.zfill(3)
-    print("nameing img" + name + ".JPG")
+    print("naming img" + name + ".JPG")
     for filename in os.listdir("."):
         if len(filename) < 13:
             if filename.endswith(".JPG"):
@@ -78,7 +75,9 @@ welcome()
 killgphoto2Process()
 gp(clearCommand)
 createSaveFolder()
-captureImages()
-renameFiles(picID)
+
+for i in range(num_max):
+    captureImages()
+    renameFiles(picID)
 
                           
