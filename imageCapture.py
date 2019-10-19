@@ -2,6 +2,7 @@ from time import sleep
 from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
+import stat
 
 num_max = -1
 num_interval = -1
@@ -57,6 +58,8 @@ def createSaveFolder():
     print("was in: " + os.getcwd())
     os.chdir("/media/pi/SANDISK 128/hackumassvii/")
     print("now in: " + os.getcwd())
+
+    os.chmod("/media/pi/SANDISK 128/hackumassvii/", stat.S_IRWXG )
 
     try:
         os.mkdir(folder_name, mode= 0o777)
