@@ -52,19 +52,22 @@ def createSaveFolder():
     
 def captureImages():
     gp(triggerCommand)
+    print("took picture")
     global num_shot
-    num_shot += 1
     sleep(num_interval)
     gp(downloadCommand)
     gp(clearCommand)
+
     
 def renameFiles():
-    name = str(num_shot)
-    name = name.zfill(3)
-    print("naming img" + name + ".JPG")
+    pictures = 0
     for filename in os.listdir("."):
         if len(filename) < 13:
             if filename.endswith(".JPG"):
+                name = str(pictures)
+                name = name.zfill(3)
+                pictures += 1 
+                print("naming "+ filename +" to img" + name + ".JPG")
                 os.rename(filename, ("img" + name + ".JPG"))
                 print("renamed the jpg")
             #elif filename.endswith(".CR2"):
