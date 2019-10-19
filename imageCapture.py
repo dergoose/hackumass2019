@@ -3,6 +3,9 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
+bashCommand = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
+
+
 num_shot = 0
 num_max = -1
 num_interval = -1
@@ -58,7 +61,6 @@ def captureImages():
     goodPrint("took picture")
     sleep(num_interval)
 
-
 def renameFiles():
     pictures = 0
     listPic = os.listdir(".")
@@ -72,8 +74,7 @@ def renameFiles():
                 goodPrint("naming "+ filename +" to img" + name + ".JPG")
                 os.rename(filename, ("img" + name + ".JPG"))
                 goodPrint("renamed the jpg")
-
-                
+     
 welcome()
 killgphoto2Process()
 gp(clearCommand)
@@ -82,12 +83,8 @@ createSaveFolder()
 for i in range(num_max):
     captureImages()
 
-
 gp(downloadCommand)
 renameFiles()
 gp(clearCommand)
-
-
-
-
-                          
+process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+output, error = process.communicate() 
