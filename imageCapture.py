@@ -88,6 +88,11 @@ renameFiles()
 gp(clearCommand)
 
 os.chdir(save_location)
+print(os.getcwd())
+
+process1 = subprocess.Popen("ls".split(), stdout=subprocess.PIPE)
+output, error = process1.communicate()
+
 
 process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate() 
