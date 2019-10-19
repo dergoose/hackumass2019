@@ -20,7 +20,6 @@ downloadCommand = ["--get-all-files"]
 folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
-bashCommand1 = "cd " + folder_name
 bashCommand2 = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
 
 def goodPrint(prin):
@@ -88,7 +87,7 @@ gp(downloadCommand)
 renameFiles()
 gp(clearCommand)
 
-os.chdir(folder_name)
+os.chdir(save_location)
 
 process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate() 
