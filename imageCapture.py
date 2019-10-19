@@ -62,7 +62,7 @@ def captureImages():
     sleep(num_interval)
 
 def renameFiles():
-    pictures = 0
+    pictures = 1
     listPic = os.listdir(".")
     listPic.sort()
     for filename in listPic:
