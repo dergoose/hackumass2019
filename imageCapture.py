@@ -33,9 +33,9 @@ def welcome():
     global num_interval
     num_interval = int(num_int)
 
-    if num_interval < 3 or num_max < 1:
-        print("Invalid input")
-        exit()
+    # if num_interval < 3 or num_max < 1:
+    #     print("Invalid input")
+    #     exit()
 
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
