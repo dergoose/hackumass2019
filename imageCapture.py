@@ -8,7 +8,7 @@ num_max = -1
 num_interval = -1
 
 def goodPrint(prin):
-    print(datetime.now() + " - " + prin)
+    print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
 
 def welcome():
     num_pic = input ("Enter how many photos you'd like to take: ") 
