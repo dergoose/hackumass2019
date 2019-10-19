@@ -55,7 +55,9 @@ def killgphoto2Process():
             os.kill(pid, signal.SIGKILL)
 
 def createSaveFolder():
+    print("was in: " + os.getcwd())
     os.chdir(save_location)
+    print("now in: " + os.getcwd())
 
     try:
         os.mkdir(folder_name, exist_ok=True)
