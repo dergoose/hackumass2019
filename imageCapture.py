@@ -61,7 +61,7 @@ def createSaveFolder():
     except:
         print("Failed to create the picture directory.")
 
-    if(os.path.exists(save_location)):
+    if os.path.exists(save_location):
         print("wut")
         exit()
 
