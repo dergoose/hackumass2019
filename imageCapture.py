@@ -16,7 +16,7 @@ triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
-save_location = "/media/pi/SANDISK\ 128/hackumassvii/" + folder_name
+save_location = "/media/pi/SANDISK 128/hackumassvii/" + folder_name
 
 
 
