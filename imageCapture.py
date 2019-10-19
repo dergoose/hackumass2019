@@ -64,6 +64,7 @@ def captureImages():
 def renameFiles(ID):
     name = str(num_shot)
     name.zfill(3)
+    print("nameing img" + name + ".JPG")
     for filename in os.listdir("."):
         if len(filename) < 13:
             if filename.endswith(".JPG"):
