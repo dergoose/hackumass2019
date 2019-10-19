@@ -9,14 +9,14 @@ num_interval = -1
 
 def welcome():
     num_pic = input ("Enter how many photos you'd like to take: ") 
-    num_int = input ("Enter how long your interval is (greater than 3): ") 
-    if num_int < 3:
-        print("Invalid interval")
-        exit()
+    num_int = input ("Enter how long your interval is (greater than 2): ") 
     global num_max
     num_max = int(num_pic)
     global num_interval
     num_interval = int(num_int)
+    if num_interval < 3:
+        print("Invalid interval")
+        exit()
     
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
