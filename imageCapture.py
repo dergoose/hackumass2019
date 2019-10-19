@@ -3,18 +3,34 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
-#kill gphoto2 process that starts whenever we connect the camera
+num_shot = 0
+num_max = -1
+num_interval = -1
 
+def welcome():
+    num_pic = input ("Enter how many photos you'd like to take: ") 
+    num_int = input ("Enter how long your interval is (greater than 3): ") 
+    if(num_int < 3):
+        print("Invalid interval")
+        exit()
+    global num_max
+    num_max = num_pic
+    global num_interval
+    num_interval = num_int
+    
+
+
+#kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
-        p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
-        out, err = p.communicate()
-        
-        #search for the line that has the process we want to kill
-        for line in out.splitlines():
-            if b'gvfsd-gphoto2' in line:
-                #kill the process
-                pid = int(line.split(None,1)[0])
-                os.kill(pid, signal.SIGKILL)
+    p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
+    out, err = p.communicate()
+    
+    #search for the line that has the process we want to kill
+    for line in out.splitlines():
+        if b'gvfsd-gphoto2' in line:
+            #kill the process
+            pid = int(line.split(None,1)[0])
+            os.kill(pid, signal.SIGKILL)
 
 shot_date = datetime.now().strftime("%Y-%m-%d")
 shot_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -36,20 +52,26 @@ def createSaveFolder():
     os.chdir(save_location)
     
 def captureImages():
-    gp(triggerCommand)
-    sleep(3)
-    gp(downloadCommand)
-    gp(clearCommand)
+    for i in range(num_max):
+        gp(triggerCommand)
+        global num_shot
+        num_shot += 1
+        sleep(num_interval)
+        gp(downloadCommand)
+        gp(clearCommand)
     
 def renameFiles(ID):
+    name = str(num_shot)
+    name.zfill(3)
     for filename in os.listdir("."):
         if len(filename) < 13:
             if filename.endswith(".JPG"):
-                os.rename(filename, (shot_time + ID + ".JPG"))
+                os.rename(filename, ("img" + name + ".JPG"))
                 print("renamed the jpg")
-            elif filename.endswith(".CR2"):
-                os.rename(filename, (shot_time + ID + ".CR2"))
-                print("renamed the cr2")
+            #elif filename.endswith(".CR2"):
+                #os.rename(filename, (shot_time + ID + ".CR2"))
+                #print("renamed the cr2")
+                
 killgphoto2Process()
 gp(clearCommand)
 createSaveFolder()
