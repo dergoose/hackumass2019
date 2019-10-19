@@ -3,7 +3,6 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
-num_shot = 0
 num_max = -1
 num_interval = -1
 
@@ -27,17 +26,17 @@ def welcome():
     num_sec = input ("How long is your time lapse (seconds): ")
     num_int = input ("Enter how long your interval is (greater than 2): ")
 
-    if num_sec > 300:
+    if int(num_sec) > 300:
         print("Invalid input")
         exit()
 
-
-    num_pic = num_sec / num_int
+    num_pic = (int(num_sec) * 24) / int(num_int)
 
     global num_max
     num_max = int(num_pic)
     global num_interval
     num_interval = int(num_int)
+
 
     # if num_interval < 3 or num_max < 1:
     #     print("Invalid input")
