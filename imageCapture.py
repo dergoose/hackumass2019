@@ -16,7 +16,7 @@ triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
-save_location = "/media/pi/SANDISK 128/hackumassvii/" + folder_name
+save_location = "/media/pi/SANDISK 128/hackumassvii/"
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -55,13 +55,15 @@ def killgphoto2Process():
             os.kill(pid, signal.SIGKILL)
 
 def createSaveFolder():
+    os.chdir(save_location)
+
     try:
-        os.makedirs(save_location, exist_ok=True)
+        os.mkdirs(folder_name, exist_ok=True)
     except:
         print("Failed to create the picture directory.")
 
-    if not os.path.exists(save_location):
-        print("wut")
+    if not os.path.exists(folder_name):
+        print("Creation failure")
         exit()
 
     os.chdir(save_location)
