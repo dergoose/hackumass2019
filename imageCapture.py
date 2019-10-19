@@ -10,7 +10,7 @@ num_interval = -1
 def welcome():
     num_pic = input ("Enter how many photos you'd like to take: ") 
     num_int = input ("Enter how long your interval is (greater than 3): ") 
-    if(num_int < 3):
+    if num_int < 3:
         print("Invalid interval")
         exit()
     global num_max
