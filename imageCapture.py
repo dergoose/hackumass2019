@@ -45,7 +45,7 @@ def welcome():
 #kill gphoto2 process that starts whenever we connect the camera
 def killgphoto2Process():
     p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
-
+    out, err = p.communicate()
     #search for the line that has the process we want to kill
     for line in out.splitlines():
         if b'gvfsd-gphoto2' in line:
