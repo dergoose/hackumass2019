@@ -3,8 +3,6 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
-bashCommand1 = "cd " + folder_name
-bashCommand2 = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
 
 num_shot = 0
 num_max = -1
@@ -21,6 +19,9 @@ downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
+
+bashCommand1 = "cd " + folder_name
+bashCommand2 = "ffmpeg -framerate 24 -i img%03d.jpg output.mp4"
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
