@@ -17,8 +17,6 @@ triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
 folder_name = shot_time + picID
-save_location = "/home/pi/Desktop/gphoto/images" + folder_name
-
 
 
 def goodPrint(prin):
@@ -26,8 +24,16 @@ def goodPrint(prin):
 
 #input desired photos and frequency of capture thru the terminal
 def welcome():
-    num_pic = input ("Enter how many photos you'd like to take: ")
+    num_sec = input ("How long is your time lapse (seconds): ")
     num_int = input ("Enter how long your interval is (greater than 2): ")
+
+    if num_sec > 300:
+        print("Invalid input")
+        exit()
+
+
+    num_pic = num_sec / num_int
+
     global num_max
     num_max = int(num_pic)
     global num_interval
@@ -50,11 +56,20 @@ def killgphoto2Process():
             os.kill(pid, signal.SIGKILL)
 
 def createSaveFolder():
+
     try:
-        os.makedirs(save_location)
+        os.makedirs("hackumassvii")
     except:
-        print("Failed to create the new directory.")
-    os.chdir(save_location)
+        print("Failed to create base directory.")
+
+    os.chdir("/media/pi/SANDISK 128/hackumassvii")
+
+    try:
+        os.makedirs("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
+    except:
+        print("Failed to create the picture directory.")
+
+    os.chdir("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
 
 def captureImages():
     gp(triggerCommand)
@@ -91,7 +106,7 @@ gp(clearCommand)
 bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
 
 
-os.chdir(save_location)
+os.chdir("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
 print(os.getcwd())
 
 process1 = subprocess.Popen("ls".split(), stdout=subprocess.PIPE)
