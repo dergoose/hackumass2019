@@ -18,8 +18,6 @@ downloadCommand = ["--get-all-files"]
 folder_name = shot_time + picID
 save_location = "/media/pi/SANDISK 128/hackumassvii/" + folder_name
 
-
-
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
 
@@ -59,9 +57,13 @@ def killgphoto2Process():
 def createSaveFolder():
 
     try:
-        os.makedirs(save_location)
+        os.makedirs(save_location, exist_ok=True)
     except:
         print("Failed to create the picture directory.")
+
+    if(os.path.exists(save_location)):
+        print("wut")
+        exit()
 
     os.chdir(save_location)
 
@@ -100,7 +102,7 @@ gp(clearCommand)
 bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
 
 
-os.chdir("/media/pi/SANDISK 128/hackumassvii/" + folder_name)
+os.chdir(save_location)
 print(os.getcwd())
 
 process1 = subprocess.Popen("ls".split(), stdout=subprocess.PIPE)
