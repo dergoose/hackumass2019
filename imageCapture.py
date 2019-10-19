@@ -57,8 +57,7 @@ def captureImages():
     gp(triggerCommand)
     goodPrint("took picture")
     sleep(num_interval)
-    gp(downloadCommand)
-    gp(clearCommand)
+
 
 def renameFiles():
     pictures = 0
@@ -83,6 +82,12 @@ createSaveFolder()
 for i in range(num_max):
     captureImages()
 
+
+gp(downloadCommand)
 renameFiles()
+gp(clearCommand)
+
+
+
 
                           
