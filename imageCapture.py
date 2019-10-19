@@ -88,7 +88,7 @@ renameFiles()
 gp(clearCommand)
 
 
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mp4"
+bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
 
 
 os.chdir(save_location)
