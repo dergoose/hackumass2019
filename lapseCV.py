@@ -8,7 +8,7 @@ print(os.getcwd())
 
 # Folder which contains all the images
 # from which video is to be generated
-os.chdir("/home/pi/Desktop/gphoto/images") 
+os.chdir("/home/pi/Desktop/gphoto/images")
 path = "/home/pi/Desktop/gphoto/images"
 
 mean_height = 0
@@ -57,7 +57,7 @@ for file in os.listdir('.'):
 def generate_video():
 	image_folder = '.' # make sure to use your folder
 	video_name = 'mygeneratedvideo.avi'
-	os.chdir("C:\\Python\\Geekfolder2")
+	os.chdir("/home/pi/Desktop/gphoto/images")
 
 	images = [img for img in os.listdir(image_folder)
 			if img.endswith(".jpg") or
