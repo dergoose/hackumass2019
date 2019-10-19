@@ -19,7 +19,7 @@ downloadCommand = ["--get-all-files"]
 folder_name = shot_time + picID
 save_location = "/home/pi/Desktop/gphoto/images" + folder_name
 
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.jpg output.mp4"
+
 
 def goodPrint(prin):
     print(datetime.now().strftime("%H:%M:%S") + " - " + prin)
@@ -86,6 +86,10 @@ for i in range(num_max):
 gp(downloadCommand)
 renameFiles()
 gp(clearCommand)
+
+
+bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.jpg output.mp4"
+
 
 os.chdir(save_location)
 print(os.getcwd())
