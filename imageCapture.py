@@ -58,9 +58,9 @@ def captureImages():
     gp(downloadCommand)
     gp(clearCommand)
     
-def renameFiles(ID):
+def renameFiles():
     name = str(num_shot)
-    name.zfill(3)
+    name = name.zfill(3)
     print("naming img" + name + ".JPG")
     for filename in os.listdir("."):
         if len(filename) < 13:
@@ -78,6 +78,7 @@ createSaveFolder()
 
 for i in range(num_max):
     captureImages()
-    renameFiles(picID)
+
+renameFiles()
 
                           
