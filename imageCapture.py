@@ -31,7 +31,7 @@ def welcome():
         print("Invalid input")
         exit()
 
-    num_pic = (int(num_sec) * 24) / int(num_int)
+    num_pic = int(num_sec) * 24
 
     global num_max
     num_max = int(num_pic)
@@ -104,7 +104,7 @@ renameFiles()
 gp(clearCommand)
 
 
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
+bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.webm"
 
 
 os.chdir(parent_dir +"/" + directory)
