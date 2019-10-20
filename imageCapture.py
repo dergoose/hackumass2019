@@ -16,7 +16,7 @@ clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
 triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
-directory = picID
+directory = picID + shot_time
 parent_dir = "/media/pi/SANDISK 128/hackumassvii" 
 
 def goodPrint(prin):
@@ -105,10 +105,8 @@ gp(clearCommand)
 
 
 bashCommand1 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
-bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.webm"
-bashCommand3 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mp4"
-bashCommand4 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.ogg"
-bashCommand5 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mkv"
+bashCommand2 = "ffmpeg -i output.avi output.mp4"
+
 
 
 os.chdir(parent_dir +"/" + directory)
@@ -119,12 +117,3 @@ output, error = process1.communicate()
 
 process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate()
-
-process3 = subprocess.Popen(bashCommand3.split(), stdout=subprocess.PIPE)
-output, error = process3.communicate()
-
-process4 = subprocess.Popen(bashCommand4.split(), stdout=subprocess.PIPE)
-output, error = process4.communicate()
-
-process5 = subprocess.Popen(bashCommand5.split(), stdout=subprocess.PIPE)
-output, error = process4.communicate()
