@@ -7,6 +7,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import './Website.css';
 
+//var shell = require('shelljs');
+
+
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
@@ -34,7 +37,7 @@ export default function Inputs() {
         </Toolbar>
       </AppBar>
 
-      <iframe class = "frame" src="https://drive.google.com/file/d/1GwCH3ymJQUVm7JH06cqqcQi3KL-FTXrz/preview"></iframe>
+      <iframe className = "frame" src="https://drive.google.com/file/d/1GwCH3ymJQUVm7JH06cqqcQi3KL-FTXrz/preview"></iframe>
 {/* 
       <video id='my-video' className='video-js' controls autoPlay={true} preload='auto' width='auto' height='500'
         poster='MY_VIDEO_POSTER.jpg' data-setup='{}'  style = {{margin: "auto" }}>
@@ -73,6 +76,8 @@ export default function Inputs() {
         Submit
       </Button>
     </div>
+
+    
   
   );
 }
