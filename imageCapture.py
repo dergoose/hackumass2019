@@ -104,15 +104,24 @@ renameFiles()
 gp(clearCommand)
 
 
+bashCommand1 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
 bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.webm"
+bashCommand3 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mp4"
+bashCommand4 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.ogg"
+bashCommand5 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.mkv"
 
 
 os.chdir(parent_dir +"/" + directory)
 print(os.getcwd())
 
-process1 = subprocess.Popen("ls".split(), stdout=subprocess.PIPE)
+process1 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
 output, error = process1.communicate()
 
-
-process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
+process2 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate()
+
+process3 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+output, error = process3.communicate()
+
+process4 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+output, error = process4.communicate()
