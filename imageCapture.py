@@ -117,11 +117,14 @@ print(os.getcwd())
 process1 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
 output, error = process1.communicate()
 
-process2 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
 output, error = process2.communicate()
 
-process3 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+process3 = subprocess.Popen(bashCommand3.split(), stdout=subprocess.PIPE)
 output, error = process3.communicate()
 
-process4 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
+process4 = subprocess.Popen(bashCommand4.split(), stdout=subprocess.PIPE)
+output, error = process4.communicate()
+
+process5 = subprocess.Popen(bashCommand5.split(), stdout=subprocess.PIPE)
 output, error = process4.communicate()
