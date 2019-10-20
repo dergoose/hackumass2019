@@ -8,7 +8,7 @@ num_max = -1
 num_interval = -1
 
 shot_date = datetime.now().strftime("%Y-%m-%d")
-shot_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+shot_time = datetime.now().strftime("%Y%m%d%H%M%S")
 picID = "spacelapse" #we change dis
 
 clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
@@ -16,7 +16,7 @@ clearCommand = ["--folder", "/store_00020001/DCIM/100CANON", \
 triggerCommand = ["--trigger-capture"]
 downloadCommand = ["--get-all-files"]
 
-directory = picID + shot_time
+directory = picID + str(shot_time)
 parent_dir = "/media/pi/SANDISK 128/hackumassvii" 
 
 def goodPrint(prin):
@@ -27,11 +27,11 @@ def welcome():
     num_sec = input ("How long is your time lapse (seconds): ")
     num_int = input ("Enter how long your interval is (greater than 2): ")
 
-    if int(num_sec) > 300:
+    if float(num_sec) > 300:
         print("Invalid input")
         exit()
 
-    num_pic = int(num_sec) * 24
+    num_pic = float(num_sec) * 24
 
     global num_max
     num_max = int(num_pic)
@@ -104,9 +104,7 @@ renameFiles()
 gp(clearCommand)
 
 
-bashCommand1 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
-bashCommand2 = "ffmpeg -i output.avi output.mp4"
-
+bashCommand1 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG -codec:v mpeg4  output.mp4"
 
 
 os.chdir(parent_dir +"/" + directory)
@@ -114,6 +112,3 @@ print(os.getcwd())
 
 process1 = subprocess.Popen(bashCommand1.split(), stdout=subprocess.PIPE)
 output, error = process1.communicate()
-
-process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
-output, error = process2.communicate()
