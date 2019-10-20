@@ -1,5 +1,3 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": "C:\\Users\\cpgus\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+    "git.ignoreLimitWarning": true
 }
