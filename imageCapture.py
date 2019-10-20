@@ -106,6 +106,10 @@ gp(clearCommand)
 
 bashCommand2 = "ffmpeg -start_number 001 -start_number_range " + str(num_max) + " -framerate 24 -i img%03d.JPG output.avi"
 
+
+os.chdir(parent_dir +"/" + directory)
+print(os.getcwd())
+
 process1 = subprocess.Popen("ls".split(), stdout=subprocess.PIPE)
 output, error = process1.communicate()
 
